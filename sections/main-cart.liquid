@@ -41,9 +41,16 @@
       <div class="cart-footer">
         <p class="cart-footer__total">Subtotal: {{ cart.total_price | money }}</p>
         <p>Taxes and shipping calculated at checkout.</p>
-        <button type="submit" name="update" class="product-form__button" style="background: transparent; border: 1px solid; color: var(--color-text);">Update Cart</button>
+        <button type="submit" name="update" class="product-form__button button--secondary">Update Cart</button>
         <button type="submit" name="checkout" class="product-form__button cart-footer__checkout-button">Checkout</button>
       </div>
     </form>
   {%- endif -%}
 </div>
+
+{% schema %}
+{
+  "name": "Main Cart",
+  "settings": []
+}
+{% endschema %}

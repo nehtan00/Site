@@ -119,14 +119,10 @@ img { max-width: 100%; height: auto; }
   font-family: var(--font-heading);
   font-size: 1.6rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .product-form__button:hover { background-color: {{ settings.color_accent | color_lighten: 10 }}; }
 .product-form__button:disabled { background-color: #555; cursor: not-allowed; }
-
-/* Main Collection Page */
-.collection-header { text-align: center; margin-bottom: 4rem; }
-.collection-header__title { font-size: 4rem; }
 
 /* Cart Page */
 .cart-items { border-collapse: collapse; width: 100%; margin-bottom: 3rem; }
@@ -136,3 +132,29 @@ img { max-width: 100%; height: auto; }
 .cart-footer { text-align: right; }
 .cart-footer__total { font-size: 2rem; font-family: var(--font-heading); margin-bottom: 2rem; }
 .cart-footer__checkout-button { /* Uses .product-form__button styles */ }
+
+/* Skip to content link */
+.skip-to-content-link {
+  position: absolute;
+  transform: translateY(-150%);
+  transition: transform 0.3s;
+  background: var(--color-accent);
+  color: var(--color-background);
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  z-index: 100;
+}
+.skip-to-content-link:focus { transform: translateY(0%); }
+
+/* Secondary button style for things like "Update Cart" */
+.button--secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-accent);
+}
+.button--secondary:hover {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  border-color: var(--color-accent);
+}

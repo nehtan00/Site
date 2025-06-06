@@ -1,0 +1,50 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="main-product" data-section-id="{{ section.id }}">
+  <div class="main-product__media">
+    <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | escape }}" width="1200" height="1200">
+  </div>
+
+  <div class="main-product__info">
+    <h1 class="main-product__title">{{ product.title }}</h1>
+    <div class="main-product__price">
+      {{ current_variant.price | money }}
+    </div>
+
+    {%- form 'product', product, class: 'product-form' -%}
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+      {%- unless product.has_only_default_variant -%}
+        <div class="product-form__variants">
+          {%- for option in product.options_with_values -%}
+            <label for="Option-{{ forloop.index }}" class="product-form__label">{{ option.name }}</label>
+            <select name="options[{{ option.name | escape }}]" id="Option-{{ forloop.index }}" class="product-form__select">
+              {%- for value in option.values -%}
+                <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                  {{ value }}
+                </option>
+              {%- endfor -%}
+            </select>
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+
+      <button
+        type="submit"
+        name="add"
+        class="product-form__button"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        {%- if current_variant.available -%}
+          Add to Cart
+        {%- else -%}
+          Sold Out
+        {%- endif -%}
+      </button>
+    {%- endform -%}
+
+    <div class="main-product__description">
+      {{ product.description }}
+    </div>
+  </div>
+</section>

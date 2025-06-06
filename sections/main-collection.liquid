@@ -1,0 +1,24 @@
+<div class="collection-header">
+  <h1 class="collection-header__title">{{ collection.title }}</h1>
+  <div class="collection-header__description">
+    {{ collection.description }}
+  </div>
+</div>
+
+<ul class="grid grid--3-cols">
+  {%- for product in collection.products -%}
+    <li class="card">
+      <a href="{{ product.url }}" class="card__link">
+        <div class="card__image-wrapper">
+          <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" class="card__image" loading="lazy" width="600" height="600">
+        </div>
+        <div class="card__info">
+          <h2 class="card__title">{{ product.title }}</h2>
+          <p class="card__price">{{ product.price | money }}</p>
+        </div>
+      </a>
+    </li>
+  {%- else -%}
+    <p>No products in this collection.</p>
+  {%- endfor -%}
+</ul>

@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "tool-runner",
+      "type": "main-collection",
       "settings": {}
     }
   },

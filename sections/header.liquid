@@ -1,5 +1,8 @@
 <header class="site-header">
   <a href="{{ routes.root_url }}" class="site-header__title" style="color: {{ settings.color_text }}; text-decoration: none;">
-    TextFX
+    {{ shop.name }}
+  </a>
+  <a href="{{ routes.cart_url }}">
+    Cart ({{ cart.item_count }})
   </a>
 </header>

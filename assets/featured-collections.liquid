@@ -1,0 +1,49 @@
+<div class="page-width">
+  <ul class="grid grid--3-cols">
+    {%- for block in section.blocks -%}
+      {%- assign collection = block.settings.collection -%}
+      <li class="card" {{ block.shopify_attributes }}>
+        <a href="{{ collection.url | default: '#' }}" class="card__link">
+          <div class="card__image-wrapper">
+            {%- if collection.image -%}
+              <img src="{{ collection.image | image_url: width: 600 }}" alt="{{ collection.image.alt | escape }}" class="card__image" loading="lazy" width="600" height="600">
+            {%- elsif collection.products.first.featured_image -%}
+               <img src="{{ collection.products.first.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" class="card__image" loading="lazy" width="600" height="600">
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg card__image' }}
+            {%- endif -%}
+          </div>
+          <div class="card__info">
+            <h2 class="card__title">{{ collection.title | default: "Collection" }}</h2>
+            <p class="card__description">{{ collection.description | truncate: 100 }}</p>
+          </div>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Collections",
+  "max_blocks": 9,
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collections"
+    }
+  ]
+}
+{% endschema %}

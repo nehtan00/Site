@@ -1,11 +1,11 @@
 {
   "sections": {
-    "main": {
-      "type": "tool-grid",
+    "featured_collections": {
+      "type": "featured-collections",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "featured_collections"
   ]
 }

@@ -4,11 +4,6 @@
   --color-card-background: {{ settings.color_card_background }};
   --color-text: {{ settings.color_text }};
   --color-accent: {{ settings.color_accent }};
-  --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-  --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-  --font-weight-heading: {{ settings.font_heading.weight }};
-  --font-style-heading: {{ settings.font_heading.style }};
-  --font-weight-body: {{ settings.font_body.weight }};
 }
 
 /* Base Styles */
@@ -18,6 +13,8 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-body);
+  font-style: var(--font-style-body);
+  font-weight: var(--font-weight-body);
   font-size: 1.6rem;
   line-height: 1.6;
   margin: 0;
@@ -35,6 +32,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: var(--font-weight-heading);
+  font-style: var(--font-style-heading);
   color: var(--color-text);
   margin-top: 0;
 }
@@ -119,10 +117,10 @@ img { max-width: 100%; height: auto; }
   font-family: var(--font-heading);
   font-size: 1.6rem;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, filter 0.2s ease;
 }
-.product-form__button:hover { background-color: {{ settings.color_accent | color_lighten: 10 }}; }
-.product-form__button:disabled { background-color: #555; cursor: not-allowed; }
+.product-form__button:hover { filter: brightness(1.1); }
+.product-form__button:disabled { background-color: #555; cursor: not-allowed; filter: none; }
 
 /* Cart Page */
 .cart-items { border-collapse: collapse; width: 100%; margin-bottom: 3rem; }

@@ -1,0 +1,23 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged “{{ tags }}”",
+      "page": "Page {{ page }}"
+    },
+    "404": {
+      "title": "404 Page Not Found",
+      "subtext": "The page you are looking for does not exist."
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart"
+    }
+  },
+  "product": {
+    "general": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out"
+    }
+  }
+}

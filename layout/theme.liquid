@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>
+    {{ page_title }}
+    {% if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{%- endif %}
+    {% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}
+    {% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  <meta name="description" content="{{ page_description | escape }}">
+
+  {% comment %} Load custom fonts {% endcomment %}
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  {% comment %} Load main stylesheet {% endcomment %}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
+  {{ content_for_header }}
+</head>
+
+<body class="gradient">
+
+  <header role="banner" class="site-header">
+      <div class="page-width">
+        <div class="header-content">
+            <h1 class="site-title"><a href="/">{{ shop.name }}</a></h1>
+            <nav>
+                <ul>
+                    {% for link in linklists.main-menu.links %}
+                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                    {% endfor %}
+                    <li><a href="/cart">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+      </div>
+  </header>
+
+  <main role="main" id="MainContent" class="main-content">
+    {{ content_for_layout }}
+  </main>
+
+  <footer class="site-footer">
+      <div class="page-width">
+        <p>&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}</p>
+        <p><a href="https://www.shopify.com" target="_blank" rel="noopener">Powered by Shopify</a></p>
+      </div>
+  </footer>
+
+</body>
+</html>

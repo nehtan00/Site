@@ -11,7 +11,7 @@
   <title>
     {{ page_title }}
     {%- if current_tags %} – {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
-    {%- if current_page != 1 %} – {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- if current_page != 1 %} – {{ 'general.meta.page' | t: page: current_page }}{% endunless -%}
     {%- unless page_title contains shop.name %} – {{ shop.name }}{% endunless -%}
   </title>
 
@@ -29,9 +29,14 @@
     {{ space_mono | font_face: font_display: 'swap' }}
   </style>
 
+  {% comment %} Corrected to use your 'theme.css' filename {% endcomment %}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+  {% comment %} This is the mandatory line that was missing {% endcomment %}
+  {{ content_for_header }}
+
 </head>
 
 <body class="gradient">

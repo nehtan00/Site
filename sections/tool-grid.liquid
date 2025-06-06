@@ -1,0 +1,45 @@
+<div class="tool-grid-wrapper">
+  <ul class="tool-grid">
+    {%- for block in section.blocks -%}
+      <li class="tool-card" {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.page_url }}" class="tool-card__link">
+          <h2 class="tool-card__title">{{ block.settings.title | escape }}</h2>
+          <p class="tool-card__description">{{ block.settings.description | escape }}</p>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Tool Grid",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "tool",
+      "name": "Tool",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tool Title",
+          "default": "SIMILE"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Tool Description",
+          "default": "Create a simile by comparing your subject to something else."
+        },
+        {
+          "type": "page",
+          "id": "page_url",
+          "label": "Tool Page",
+          "info": "Create a page for this tool and assign it the 'tool' template."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

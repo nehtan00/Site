@@ -1,184 +1,208 @@
-/* ============================================= */
-/* == Custom 'Text FX' Theme Styles Start == */
-/* ============================================= */
-
-/* --- 1. Core Color & Font Variables --- */
+/* CSS Variables from Shopify Settings */
 :root {
-  --bg-color: #121212;
-  --primary-color: #BB86FC;
-  --primary-variant-color: #3700B3;
-  --secondary-color: #03DAC6;
-  --surface-color: #1E1E1E;
-  --on-surface-color: #E0E0E0;
-  --on-primary-color: #000000;
-  --border-color: #2e2e2e;
-  --text-color-primary: #E0E0E0;
-  --text-color-secondary: #a0a0a0;
-  --font-heading: 'Space Mono', monospace;
-  --font-body: 'Roboto Mono', monospace;
+  --color-background: {{ settings.color_background }};
+  --color-card-background: {{ settings.color_card_background }};
+  --color-text: {{ settings.color_text }};
+  --color-accent: {{ settings.color_accent }};
+  --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+  --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+  --font-weight-heading: {{ settings.font_heading.weight }};
+  --font-style-heading: {{ settings.font_heading.style }};
+  --font-weight-body: {{ settings.font_body.weight }};
 }
 
-/* --- 2. General Body & Layout Styles --- */
+/* Base Styles */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 62.5%; } /* 1rem = 10px */
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color-primary);
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-family: var(--font-body);
+  font-size: 1.6rem;
+  line-height: 1.6;
   margin: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-
 .main-content {
   flex-grow: 1;
-}
-
-.page-width {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 4rem 2rem;
 }
-
-/* --- 3. Typography --- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  color: var(--text-color-primary);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-text);
   margin-top: 0;
-  margin-bottom: 1.5rem;
 }
-
-h1, .h1, .site-title a {
-   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-decoration: none;
-}
-
-h3 {
-  color: var(--secondary-color);
-}
-
-p {
-  color: var(--text-color-secondary);
-  line-height: 1.7;
-  margin-bottom: 1rem;
-}
-
 a {
-  color: var(--secondary-color);
+  color: var(--color-accent);
   text-decoration: none;
-  transition: color 0.3s ease;
 }
+a:hover { text-decoration: underline; }
 
-a:hover {
-  color: var(--primary-color);
-}
-
-/* --- 4. Buttons --- */
-.button, button, input[type="submit"] {
-  background-color: var(--primary-color);
-  color: var(--on-primary-color);
-  font-family: var(--font-heading);
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-}
-
-.button:hover, button:hover, input[type="submit"]:hover {
-  background-color: #a050f0;
-  color: var(--on-primary-color);
-}
-
-/* --- 5. Header and Footer --- */
+/* Header & Footer */
 .site-header, .site-footer {
-    background-color: var(--bg-color);
-    padding: 2rem 0;
-}
-
-.site-header {
-    border-bottom: 1px solid var(--border-color);
-}
-
-.site-footer {
-    border-top: 1px solid var(--border-color);
-    text-align: center;
-    color: var(--text-color-secondary);
-}
-
-.site-header .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.site-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1.5rem;
-}
-.site-header nav a {
-    font-family: var(--font-heading);
-}
-
-/* --- 6. Main Content and Sections --- */
-.shopify-section {
-    padding: 3rem 0;
-}
-
-/* --- 7. Product & Collection Grid --- */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.product-card {
-  background-color: var(--surface-color);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  overflow: hidden;
+  padding: 2rem;
   text-align: center;
-  padding: 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: var(--font-heading);
+}
+.site-header__title {
+  font-size: 2.4rem;
+  margin: 0;
+}
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
 }
 
-.product-card:hover {
+/* Tool Grid - Homepage */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.tool-card {
+  background-color: var(--color-card-background);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.tool-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
-
-.product-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+.tool-card__link {
+  display: block;
+  padding: 2.5rem;
+  height: 100%;
+}
+.tool-card__title {
+  font-size: 2.8rem;
+  margin: 0 0 1rem 0;
+  color: var(--color-accent);
+}
+.tool-card__description {
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--color-text);
+  opacity: 0.8;
 }
 
-.product-card h3 {
-  font-size: 1.1rem;
-  margin: 0.5rem 0;
-}
-
-/* --- 8. Cart Page --- */
-.cart-items {
-  border-top: 1px solid var(--border-color);
-}
-.cart-item {
+/* Tool Runner - Tool Page */
+.tool-runner {
   display: flex;
-  gap: 1rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--border-color);
+  flex-direction: column;
+  gap: 4rem;
+}
+.tool-runner__header {
+  text-align: center;
+}
+.tool-runner__header .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+}
+.tool-runner__title {
+  font-size: 4rem;
+  margin: 0;
+}
+.tool-runner__io {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 768px) {
+  .tool-runner__io {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.tool-runner__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.tool-runner__label {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  opacity: 0.7;
+}
+.tool-runner__textarea, .tool-runner__output {
+  width: 100%;
+  min-height: 250px;
+  background-color: var(--color-card-background);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  resize: vertical;
+}
+.tool-runner__textarea:focus {
+  outline: 2px solid var(--color-accent);
+  border-color: transparent;
+}
+.tool-runner__output {
+  white-space: pre-wrap; /* Preserve line breaks */
+  word-wrap: break-word;
+}
+.tool-runner__output.loading::after {
+  content: '...';
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.tool-runner__controls {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.tool-runner__button {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  border: none;
+  border-radius: 50px;
+  padding: 1.2rem 3rem;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.tool-runner__button:hover {
+  background-color: {{ settings.color_accent | color_lighten: 10 }};
+}
+.tool-runner__button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
 }
 
-
-/* =========================================== */
-/* == Custom 'Text FX' Theme Styles End == */
-/* =========================================== */
+/* Skip to content link */
+.skip-to-content-link {
+  position: absolute;
+  transform: translateY(-150%);
+  transition: transform 0.3s;
+  background: var(--color-accent);
+  color: var(--color-background);
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  z-index: 100;
+}
+.skip-to-content-link:focus {
+  transform: translateY(0%);
+}

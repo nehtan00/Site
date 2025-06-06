@@ -1,0 +1,33 @@
+<div class="tool-runner" data-section-id="{{ section.id }}" data-tool-handle="{{ page.handle }}">
+  <div class="tool-runner__header">
+    <a href="{{ routes.root_url }}" class="back-link">← Back to Tools</a>
+    <h1 class="tool-runner__title">{{ page.title }}</h1>
+  </div>
+
+  <div class="tool-runner__io">
+    <div class="tool-runner__panel">
+      <label for="ToolInput-{{ section.id }}" class="tool-runner__label">Input</label>
+      <textarea
+        id="ToolInput-{{ section.id }}"
+        class="tool-runner__textarea"
+        rows="8"
+        placeholder="Enter your text here..."
+      ></textarea>
+    </div>
+    <div class="tool-runner__panel">
+      <label for="ToolOutput-{{ section.id }}" class="tool-runner__label">Output</label>
+      <div id="ToolOutput-{{ section.id }}" class="tool-runner__output"></div>
+    </div>
+  </div>
+
+  <div class="tool-runner__controls">
+    <button id="RunToolButton-{{ section.id }}" class="tool-runner__button">Run</button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tool Runner",
+  "settings": []
+}
+{% endschema %}

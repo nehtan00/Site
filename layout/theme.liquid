@@ -4,57 +4,53 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="">
+  <meta name="theme-color" content="{{ settings.color_background }}">
   <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
   <title>
     {{ page_title }}
-    {% if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{%- endif %}
-    {% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}
-    {% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    {%- if current_tags %} – {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+    {%- if current_page != 1 %} – {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} – {{ shop.name }}{% endunless -%}
   </title>
 
-  <meta name="description" content="{{ page_description | escape }}">
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
 
-  {% comment %} Load custom fonts {% endcomment %}
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
-  {% comment %} Load main stylesheet {% endcomment %}
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {%- liquid
+    assign roboto_mono = settings.font_body
+    assign space_mono = settings.font_heading
+  -%}
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  <title>{{ page_title }}</title>
+  <style>
+    {{ roboto_mono | font_face: font_display: 'swap' }}
+    {{ space_mono | font_face: font_display: 'swap' }}
+  </style>
 
-  <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
 
-  {{ content_for_header }}
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+  <script src="{{ 'tool-runner.js' | asset_url }}" defer="defer"></script>
 </head>
 
 <body class="gradient">
+  <a class="skip-to-content-link button" href="#MainContent">
+    Skip to content
+  </a>
 
-  <header role="banner" class="site-header">
-      <div class="page-width">
-        <div class="header-content">
-            <h1 class="site-title"><a href="/">{{ shop.name }}</a></h1>
-            <nav>
-                <ul>
-                    {% for link in linklists.main-menu.links %}
-                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                    {% endfor %}
-                    <li><a href="/cart">Cart</a></li>
-                </ul>
-            </nav>
-        </div>
-      </div>
-  </header>
+  {% section 'header' %}
 
-  <main role="main" id="MainContent" class="main-content">
+  <main id="MainContent" class="main-content" role="main">
     {{ content_for_layout }}
   </main>
 
-  <footer class="site-footer">
-      <div class="page-width">
-        <p>&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}</p>
-        <p><a href="https://www.shopify.com" target="_blank" rel="noopener">Powered by Shopify</a></p>
-      </div>
-  </footer>
+  {% section 'footer' %}
 
+  <ul hidden>
+    <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+  </ul>
 </body>
 </html>

@@ -1,0 +1,25 @@
+<footer class="site-footer">
+  <nav>
+    <ul>
+      {%- for link in linklists.footer.links -%}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "linklist",
+      "label": "Menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}

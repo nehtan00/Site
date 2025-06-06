@@ -29,7 +29,12 @@
     {{ space_mono | font_face: font_display: 'swap' }}
   </style>
 
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {% comment %}
+    This is the crucial change. We now point to the .css.liquid file.
+    Shopify is smart enough to know that the `stylesheet_tag` filter
+    should link to a .css file in the end.
+  {% endcomment %}
+  {{ 'theme.css.liquid' | asset_url | stylesheet_tag }}
 
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 
